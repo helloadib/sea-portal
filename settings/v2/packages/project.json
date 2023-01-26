@@ -1,0 +1,47 @@
+{
+  "general": {
+    "designResolution": {
+      "width": 640,
+      "height": 960
+    },
+    "renderPipeline": "fd8ec536-a354-4a17-9c74-4f3883c378c8"
+  },
+  "physics": {
+    "collisionMatrix": {
+      "0": 6,
+      "1": 13,
+      "2": 11,
+      "3": 6
+    },
+    "collisionGroups": [
+      {
+        "index": 1,
+        "name": "OBSTACLE"
+      },
+      {
+        "index": 2,
+        "name": "PICKUP"
+      },
+      {
+        "index": 3,
+        "name": "PLAYER"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "name": "GAME",
+      "value": 524288
+    },
+    {
+      "name": "UI",
+      "value": 262144
+    }
+  ],
+  "__version__": "1.0.4",
+  "fbx": {
+    "legacyFbxImporter": {
+      "visible": true
+    }
+  }
+}

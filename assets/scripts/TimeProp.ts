@@ -1,0 +1,5 @@
+export const TIME_PROP = {
+    TIME_SCALE: 1,
+    TIME_SCALE_INCREMENT: 0.2,
+    TIME_SCALE_TIMEOUT: 2,
+};
