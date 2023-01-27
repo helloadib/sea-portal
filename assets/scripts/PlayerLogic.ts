@@ -243,11 +243,14 @@ export class PlayerLogic extends Component {
             const scoreUI = find('CanvasUI/ScoreUI');
             let scoreCur = scoreUI.getChildByPath('CurrentScoreContainer/CurrentScore').getComponent(Label).string;
             let scoreHigh = scoreUI.getChildByPath('HighScoreContainer/HighScore').getComponent(Label).string;
-            const explosion = other.node.getChildByName('Explosion');
+            const obsExplosion = other.node.getChildByName('Explosion');
+            const plyrExplosion = this.node.getChildByName('Explosion');
             const pauseButton = find('CanvasUI/PauseButtonContainer/PauseButton');
 
-            explosion.getComponent(Animation).play();
+            obsExplosion.getComponent(Animation).play();
+            plyrExplosion.getComponent(Animation).play();
             other.node.getComponent(Animation).play('ObstacleFadeOut');
+            this.playerAnim.play('PlayerFadeOut');
             other.destroy();
             find('Canvas/Camera').getComponent(Animation).play('CameraShake');
 
