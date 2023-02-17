@@ -11,7 +11,7 @@
     "speed": 1,
     "wrapMode": 1,
     "enableTrsBlending": false,
-    "_duration": 0.6666666666666666,
+    "_duration": 2.0833333333333335,
     "_hash": 500763545,
     "_tracks": [
       {
@@ -28,7 +28,8 @@
       "__type__": "cc.animation.TrackBinding",
       "path": {
         "__id__": 2
-      }
+      },
+      "proxy": null
     },
     "_channel": {
       "__id__": 4
@@ -63,7 +64,9 @@
       0.3333333333333333,
       0.4166666666666667,
       0.5,
-      0.5833333333333334
+      0.5833333333333334,
+      0.6666666666666666,
+      2
     ],
     "_values": [
       {
@@ -97,7 +100,9 @@
       {
         "__uuid__": "2723c950-2873-4e78-a337-69a7a7b75922@f9941",
         "__expectedType__": "cc.SpriteFrame"
-      }
+      },
+      null,
+      null
     ]
   }
 ]

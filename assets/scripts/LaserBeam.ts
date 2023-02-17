@@ -4,7 +4,8 @@ import {
     ParticleSystem2D,
     find,
     instantiate,
-    Prefab
+    Prefab,
+    AudioSource
 } from 'cc';
 import { COLL_GROUP } from './CollisionGroups';
 import { GAME_STATE } from './GameState';
@@ -80,6 +81,7 @@ export class LaserBeam extends Component {
             let explosion = other.node.getChildByName('Explosion');
 
             explosion.getComponent(Animation).play();
+            explosion.getComponent(AudioSource).play();
             other.node.getComponent(Animation).play('ObstacleFadeOut');
             other.destroy();
             find('Canvas/Camera').getComponent(Animation).play('CameraShake');

@@ -62,16 +62,16 @@ export class Dialog extends Component {
         this.message.string = message;
 
         this.buttons[0].node.getComponentInChildren(Label).string = button1;
-        this.buttons[0].clickEvents[0].target = target1;
-        this.buttons[0].clickEvents[0].component = component1;
-        this.buttons[0].clickEvents[0]._componentName = component1;
-        this.buttons[0].clickEvents[0].handler = handler1;
+        this.buttons[0].clickEvents[1].target = target1;
+        this.buttons[0].clickEvents[1].component = component1;
+        this.buttons[0].clickEvents[1]._componentName = component1;
+        this.buttons[0].clickEvents[1].handler = handler1;
 
         this.buttons[1].node.getComponentInChildren(Label).string = button2 || 'No';
-        this.buttons[1].clickEvents[0].target = target2 || this.node;
-        this.buttons[1].clickEvents[0].component = component2 || 'Dialog';
-        this.buttons[1].clickEvents[0]._componentName = component2 || 'Dialog';
-        this.buttons[1].clickEvents[0].handler = handler2 || 'rejectDialog';
+        this.buttons[1].clickEvents[1].target = target2 || this.node;
+        this.buttons[1].clickEvents[1].component = component2 || 'Dialog';
+        this.buttons[1].clickEvents[1]._componentName = component2 || 'Dialog';
+        this.buttons[1].clickEvents[1].handler = handler2 || 'rejectDialog';
 
         this.animComp.getState('EndMenuIn').wrapMode = AnimationClip.WrapMode.Normal;
         this.animComp.play();

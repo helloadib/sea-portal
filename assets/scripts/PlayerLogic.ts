@@ -1,7 +1,7 @@
 import {
     _decorator, Component, Node, input, Input, EventTouch, UITransform,
     Collider2D, Contact2DType, find, Label, sys, Animation, AnimationClip,
-    Sprite, Color, tween, Vec3,
+    Sprite, Color, tween, Vec3, AudioSource,
 } from 'cc';
 import { COLL_GROUP } from './CollisionGroups';
 import { GAME_STATE } from './GameState';
@@ -246,9 +246,13 @@ export class PlayerLogic extends Component {
             const obsExplosion = other.node.getChildByName('Explosion');
             const plyrExplosion = this.node.getChildByName('Explosion');
             const pauseButton = find('CanvasUI/PauseButtonContainer/PauseButton');
+            const engineAudio = this.node.getComponent(AudioSource);
+
+            tween(engineAudio).to(1, { volume: 0.0 }).start();
 
             obsExplosion.getComponent(Animation).play();
             plyrExplosion.getComponent(Animation).play();
+            plyrExplosion.getComponent(AudioSource).play();
             other.node.getComponent(Animation).play('ObstacleFadeOut');
             this.playerAnim.play('PlayerFadeOut');
             other.destroy();

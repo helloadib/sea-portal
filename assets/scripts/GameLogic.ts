@@ -1,7 +1,9 @@
 import {
-    _decorator, Component, Node, input, Input, KeyCode, EventKeyboard, game, find, Button, director, Game
+    _decorator, Component, Node, input, Input, KeyCode, EventKeyboard, game,
+    find, director, Game, AudioSource, sys
 } from 'cc';
 import { Dialog } from './Dialog';
+import { SETTINGS } from './GameSettings';
 import { GAME_STATE } from './GameState';
 import { PauseButton } from './PauseButton';
 import { SkipButton } from './SkipButton';
@@ -14,10 +16,13 @@ export class GameLogic extends Component {
     private pauseButton: PauseButton;
 
     onLoad() {
+        const audios = this.node.getParent().getComponentsInChildren(AudioSource);
+        const backgroundAudio = find('BackgroundAudio');
+
         GAME_STATE.CUR_STATE = GAME_STATE.CACHED_STATE;
 
         this.pauseButton = find('CanvasUI').getComponentInChildren(PauseButton);
-        
+
         this.overlayMenus = [
             find('CanvasUI/EndMenu'),
             find('CanvasUI/PauseMenu'),
@@ -25,6 +30,18 @@ export class GameLogic extends Component {
             find('CanvasUI/Credits'),
             find('CanvasUI/Dialog')
         ]
+
+        if (sys.localStorage.getItem('Volume')) {
+            let volume = parseFloat(sys.localStorage.getItem('Volume'));
+
+            SETTINGS.VOLUME = volume;
+        }
+
+        for (let i = 0; i < audios.length; i++) {
+            audios[i].volume = SETTINGS.VOLUME;
+        }
+
+        director.addPersistRootNode(backgroundAudio);
     }
 
     start() {

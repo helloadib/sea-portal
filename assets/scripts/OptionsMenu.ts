@@ -1,4 +1,5 @@
-import { _decorator, Component, Node, Animation, AnimationClip, find, sys, EventKeyboard, input, Input, KeyCode } from 'cc';
+import { _decorator, Component, Node, Animation, AnimationClip, find, sys, EventKeyboard, input, Input, KeyCode, Slider, AudioSource } from 'cc';
+import { SETTINGS } from './GameSettings';
 import { GAME_STATE } from './GameState';
 import { SceneTransition } from './SceneTransition';
 import { TopBar } from './TopBar';
@@ -12,12 +13,17 @@ export class OptionsMenu extends Component {
     private eventBlocker: Node;
     private credits: Node;
     private optionsButton: boolean;
+    private audios: AudioSource[];
 
     onLoad() {
+        this.audios = this.node.getParent().getParent().getComponentsInChildren(AudioSource);
+        const audioSlider = this.node.getChildByPath('MenuContainer/Audio').getComponentInChildren(Slider)
         this.animComp = this.node.getComponent(Animation);
         this.topBar = this.node.getParent().getComponentInChildren(TopBar);
         this.eventBlocker = this.node.getChildByName('EventBlocker');
         this.credits = this.node.getParent().getChildByName('Credits');
+
+        audioSlider.progress = SETTINGS.VOLUME;
     }
 
     onEnable() {
@@ -74,6 +80,16 @@ export class OptionsMenu extends Component {
         } else {
             this.animComp.off(Animation.EventType.FINISHED, this.disableMenu, this);
         }
+    }
+
+    setAudioLevel(thisArg: Slider) {
+        SETTINGS.VOLUME = thisArg.progress;
+
+        for (let i = 0; i < this.audios.length; i++) {
+            this.audios[i].volume = SETTINGS.VOLUME;
+        }
+
+        sys.localStorage.setItem('Volume', thisArg.progress.toString())
     }
 }
 
