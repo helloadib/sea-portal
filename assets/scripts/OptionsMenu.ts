@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Animation, AnimationClip, find, sys, EventKeyboard, input, Input, KeyCode, Slider, AudioSource } from 'cc';
+import { _decorator, Component, Node, Animation, AnimationClip, find, sys, EventKeyboard, input, Input, KeyCode, Slider, AudioSource, UITransform } from 'cc';
 import { SETTINGS } from './GameSettings';
 import { GAME_STATE } from './GameState';
 import { SceneTransition } from './SceneTransition';
@@ -89,7 +89,16 @@ export class OptionsMenu extends Component {
             this.audios[i].volume = SETTINGS.VOLUME;
         }
 
-        sys.localStorage.setItem('Volume', thisArg.progress.toString())
+        sys.localStorage.setItem('Volume', thisArg.progress.toString());
+
+        this.updateSliderProgress(thisArg);
+    }
+
+    updateSliderProgress(thisArg: Slider) {
+        const progressBarUIT = thisArg.node.getChildByName('ProgressBar').getComponent(UITransform);
+        const sliderFullWidth = thisArg.node.getComponent(UITransform).width;
+        
+        progressBarUIT.width = sliderFullWidth * thisArg.progress;
     }
 }
 
