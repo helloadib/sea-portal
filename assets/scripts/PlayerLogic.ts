@@ -1,7 +1,7 @@
 import {
     _decorator, Component, Node, input, Input, EventTouch, UITransform,
     Collider2D, Contact2DType, find, Label, sys, Animation, AnimationClip,
-    Sprite, Color, tween, Vec3, AudioSource,
+    Sprite, Color, tween, Vec3, AudioSource, ParticleSystem2D,
 } from 'cc';
 import { COLL_GROUP } from './CollisionGroups';
 import { GAME_STATE } from './GameState';
@@ -246,9 +246,10 @@ export class PlayerLogic extends Component {
             const obsExplosion = other.node.getChildByName('Explosion');
             const plyrExplosion = this.node.getChildByName('Explosion');
             const pauseButton = find('CanvasUI/PauseButtonContainer/PauseButton');
-            const engineAudio = this.node.getComponent(AudioSource);
+            const plyrParticles = this.node.getComponentsInChildren(ParticleSystem2D);
+            // const engineAudio = this.node.getComponent(AudioSource);
 
-            tween(engineAudio).to(1, { volume: 0.0 }).start();
+            // tween(engineAudio).to(1, { volume: 0.0 }).start();
 
             obsExplosion.getComponent(Animation).play();
             plyrExplosion.getComponent(Animation).play();
@@ -257,6 +258,10 @@ export class PlayerLogic extends Component {
             this.playerAnim.play('PlayerFadeOut');
             other.destroy();
             find('Canvas/Camera').getComponent(Animation).play('CameraShake');
+
+            for (let i = 0; i < plyrParticles.length; i++) {
+                plyrParticles[i].stopSystem();
+            }
 
             endMenuScrCur.string = scoreCur;
             endMenuScrHigh.string = scoreHigh;
